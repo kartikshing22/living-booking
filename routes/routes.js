@@ -4,7 +4,7 @@ const booking = require("../models/booking");
 
 router.get("/", (req, res) => {
   booking
-    .findOne()
+    .findOne({ property_name: "CHAPTER KINGS CROSS" })
     .then((bookingDetail) => {
       console.log(bookingDetail);
       res.render("index", {
@@ -14,6 +14,20 @@ router.get("/", (req, res) => {
     })
     .catch((err) => {
       res.json({ message: err.message });
+      console.error(err);
+    });
+});
+router.get("/json", (req, res) => {
+  booking
+    .findOne()
+    .then((bookingDetail) => {
+      res.json({
+        title: "Property Details",
+        bookingDetail: bookingDetail,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message });
       console.error(err);
     });
 });

@@ -5,6 +5,15 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+const cors = require("cors");
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
 mongoose.connect(process.env.DATABASE_URL, { usenewurlparser: true });
 const db = mongoose.connection;
 db.on("error", (error) => console.log(error));

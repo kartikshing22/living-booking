@@ -3,7 +3,35 @@
   <% if(bookingDetail) { %>
   <h1><%= bookingDetail.property_name %></h1>
 
-  <div class="row">
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <% bookingDetail.property_images.forEach(function(image, index) { %>
+        <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" <%= index === 0 ? 'class="active"' : '' %>></li>
+      <% }); %>
+    </ol>
+    <div class="carousel-inner">
+      <% bookingDetail.property_images.forEach(function(image, index) { %>
+        <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+          <img class="d-block w-100" src="<%= image %>" alt="Slide <%= index + 1 %>">
+          <div class="carousel-caption d-none d-md-block" style="background-color: antiquewhite;border-radius:25px">
+            <!-- Add your header (caption) and description here -->
+            <h5 style="color: grey;"><%= bookingDetail.property_room_type %><span>   <%= bookingDetail.property_features %> </span></h5>
+            <p style="color: darkslategrey;">Price : <%= bookingDetail.property_price %></p>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="row" style="margin: 18px; margin-top: 50px" >
     <% bookingDetail.sub_properties.forEach(function(property) { %>
     <div class="col-md-4 mb-4">
       <div class="card">
