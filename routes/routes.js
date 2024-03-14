@@ -5,8 +5,8 @@ const booking = require("../models/booking");
 router.get("/", (req, res) => {
   booking
     .findOne({ property_name: "CHAPTER KINGS CROSS" })
+    .sort({ created_at: -1 })
     .then((bookingDetail) => {
-      console.log(bookingDetail);
       res.render("index", {
         title: "Property Details",
         bookingDetail: bookingDetail,
